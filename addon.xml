@@ -8,18 +8,32 @@
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Play video and audio podcasts from 4d.rtvslo.si</summary>
-		<summary lang="sl">Predvaja video in avdio vsebine podcastov 4d.rtvslo.si</summary>
+		<summary lang="sl">Predvaja arhivske video in avdio posnetke 4d.rtvslo.si</summary>
 		<description lang="en">RTV Slovenia is a national radio and television public broadcast organization. With this plugin you can watch both video and audio podcasts published on their website.</description>
 		<description lang="sl">RTV Slovenija je javna državna radiotelevizijska organizacija. S tem vtičnikom si lahko
 			ogledate vse televizijske in radijske posnetke oddaj (podcaste), ki so objavljeni na njihovi spletni strani.
 		</description>
 		<disclaimer lang="en"></disclaimer>
-		<language></language>
+		<language>sl</language>
 		<platform>all</platform>
 		<license>WTFPL, Version 2, December 2004</license>
 		<forum></forum>
         <website>https://github.com/dam-pav/plugin.rtvslo.podcast</website>
 		<email></email>
 		<source>https://github.com/dam-pav/plugin.rtvslo.podcast</source>
+		<news lang="en">v1.0.0 (2019-01-09)
+ - plays podcasts only, for live streams see plugin.rtvslo.live
+ - user login that works without Requests lib
+ - takes full advantage of the rich metadata RTVSLO provides (pictures, plots...)
+ - listing podcasts by calendar days rather than random pages
+ - search tool reintroduced; yes, with unicode support(čšž...)
+ - searching for audio podcasts included</news>
+		<news lang="sl">v1.0.0 (2019-01-09)
+ - predvaja izključno arhivske posnetke, za žive oddaje glej plugin.rtvslo.live
+ - prijava deluje neodvisno od knjižnice Requests
+ - uporablja bogate metadata vsebin, ki jih zagotavlja RTV Slovenija (slike, sinopsisi...)
+ - posnetki so organizirani v skupine po dnevih, namesto po naključnih straneh
+ - ponovna implementacije iskalnika; s podporo unicode (čšž...)
+ - iskalnik omogočen tudi za radijske arhive</news>
 	</extension>
 </addon>
