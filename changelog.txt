@@ -1,0 +1,7 @@
+v1.0.0
+ - plays podcasts only, for live streams see plugin.rtvslo.live
+ - user login that works without Requests lib
+ - takes full advantage of the rich metadata RTVSLO provides (pictures, plots...)
+ - listing podcasts by calendar days rather than random pages
+ - search tool reintroduced; yes, with unicode support(čšž...)
+ - searching for audio podcasts included
