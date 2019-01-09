@@ -551,7 +551,7 @@ if __name__ == "__main__":
         if contentType == 'audio':
             xbmcplugin.setContent(handle, 'songs')
         elif contentType == 'video':
-            xbmcplugin.setContent(handle, 'video')
+            xbmcplugin.setContent(handle, 'videos')
 
         # get menu and other parameters
         api = args.get('api', [''])[0]

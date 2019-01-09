@@ -8,7 +8,7 @@ Avdio/video vtičnik (add-on) za Kodi. Trenutno je potrjeno delovanje z verzijo 
 Download file as ".zip" (plugin.rtvslo.podcast-master), then install plugin via Kodi interface.  
 Prenesi ".zip" datoteko (plugin.rtvslo.podcast-master), nato namesti preko Kodi vmesnika.
 
-## Author/avtor: dam-pav ##
+## Author / avtor: dam-pav ##
 Suggestions and advice welcome.  
 Predlogi in nasveti so dobrodošli.
 
