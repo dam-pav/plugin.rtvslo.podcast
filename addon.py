@@ -15,13 +15,18 @@ import xbmcplugin
 
 #######################################
 
-# constants
+# global constants
 
-delete_action = 'deleteall893745927368199189474t52910373h2i2u2j2788927628018736tghs8291282'
 url_base = 'http://api.rtvslo.si/ava/'
 client_id = '82013fb3a531d5414f478747c1aca622'
-search_history_file = os.path.join(xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8'),
-                                   'history.json')
+delete_action = 'deleteall893745927368199189474t52910373h2i2u2j2788927628018736tghs8291282'
+
+search_history_file = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8')
+try:
+    os.makedirs(search_history_file)
+except:
+    pass
+search_history_file = os.path.join(search_history_file, 'history.json')
 
 
 # classes
