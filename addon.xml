@@ -21,18 +21,18 @@
         <website>http://dam-pav.eu5.org</website>
 		<source>https://github.com/dam-pav/plugin.rtvslo.podcast</source>
 		<news lang="en">v1.0.0 (2019-01-09)
- - plays podcasts only, for live streams see plugin.rtvslo.live
- - user login that works without Requests lib
- - takes full advantage of the rich metadata RTVSLO provides (pictures, plots...)
- - listing podcasts by calendar days rather than random pages
- - search tool reintroduced; yes, with unicode support(čšž...)
- - searching for audio podcasts included</news>
+- plays podcasts only, for live streams see plugin.rtvslo.live
+- user login that works without Requests lib
+- takes full advantage of the rich metadata RTVSLO provides (pictures, plots...)
+- listing podcasts by calendar days rather than random pages
+- search tool reintroduced; yes, with unicode support(čšž...)
+- searching for audio podcasts included</news>
 		<news lang="sl">v1.0.0 (2019-01-09)
- - predvaja izključno arhivske posnetke, za žive oddaje glej plugin.rtvslo.live
- - prijava deluje neodvisno od knjižnice Requests
- - uporablja bogate metadata vsebin, ki jih zagotavlja RTV Slovenija (slike, sinopsisi...)
- - posnetki so organizirani v skupine po dnevih, namesto po naključnih straneh
- - ponovna implementacije iskalnika; s podporo unicode (čšž...)
- - iskalnik omogočen tudi za radijske arhive</news>
+- predvaja izključno arhivske posnetke, za žive oddaje glej plugin.rtvslo.live
+- prijava deluje neodvisno od knjižnice Requests
+- uporablja bogate metadata vsebin, ki jih zagotavlja RTV Slovenija (slike, sinopsisi...)
+- posnetki so organizirani v skupine po dnevih, namesto po naključnih straneh
+- ponovna implementacije iskalnika; s podporo unicode (čšž...)
+- iskalnik omogočen tudi za radijske arhive</news>
 	</extension>
 </addon>
