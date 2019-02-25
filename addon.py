@@ -194,7 +194,6 @@ def do_Search(search_string, search_type):
     delete_history_item(search_string, True)
     if type(search_string) == unicode:
         search_string = search_string.encode('utf-8')
-    search_string = search_string.replace(' ', '+')
 
     # url parameters
     url_query = {}
@@ -240,7 +239,7 @@ def do_SearchHistory():
         return
 
     for search_entry in s_file_data.get('SearchHistory', []):
-        search_string = search_entry.replace(' ', '+')
+        search_string = search_entry
         search_string = search_string.encode('utf-8')
         li = xbmcgui.ListItem(search_entry)
         li.addContextMenuItems([('Izbriši iskanje', 'RunPlugin(%s)' % (build_url(base, {'content_type': contentType,
@@ -381,7 +380,7 @@ def login():
         a = str(cookies_dict['APISESSION'])
     except:
         xbmcgui.Dialog().ok('RTV Slovenija',
-                            'Prijava neuspešna!\n\nNekatere vsebine brez prijave niso dosegljive.\nVnos podatkov za prijavo je mogoč v nastavitvah.')
+                            'Prijava je neuspešna! Nekatere vsebine brez prijave niso dosegljive. Uporabniško ime in geslo lahko brezplačno pridobite na https://moj.rtvslo.si/prijava. Vnos podatkov za prijavo je mogoč v nastavitvah.')
 
     return a
 
