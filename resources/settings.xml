@@ -3,5 +3,12 @@
     <category label="Nastavitve">
         <setting type="text" id="username" label="Uporabniško ime" default="" visible="true"/>
 		<setting type="text" id="password" label="Geslo" default="" visible="true" option="hidden"/>
+        <setting type="bool" id="hide_nagger" label="Skrij obvestilo o geslu" default="false" visible="true" subsetting="true"/>
+        <setting type="sep"/>
+        <setting type="bool" id="hide_search" label="Skrij Iskanje" default="false" visible="true"/>
+        <setting type="bool" id="hide_mark" label="Skrij Zaznamki" default="false" visible="true"/>
+        <setting type="bool" id="hide_shows" label="Skrij Arhiv oddaj" default="false" visible="true"/>
+        <setting type="bool" id="hide_clips" label="Skrij Arhiv prispevkov" default="false" visible="true"/>
+        <setting type="bool" id="hide_letters" label="Skrij Arhiv po abecedi" default="false" visible="true"/>
     </category>
 </settings>
