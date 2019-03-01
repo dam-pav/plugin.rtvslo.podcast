@@ -1,3 +1,6 @@
+v1.0.2
+- new settings options to hide menu areas and username/password nagger
+- new functionality to mark items for later viewing; don't wait for too long, some podcasts expire in a month or so
 v1.0.1
  - bugfix: searching with more than one keywords is now working
 v1.0.0
