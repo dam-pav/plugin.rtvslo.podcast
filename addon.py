@@ -76,27 +76,27 @@ def do_MainMenu():
     api = login()
 
     # ISKANJE
-    if hide_search == 'false':
+    if hide_search != 'true':
         li = xbmcgui.ListItem('Iskanje')
         url = build_url(base, {'content_type': contentType, 'menu': 'SearchHistory', 'api': api})
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
     # ZAZNAMKI
-    if hide_mark == 'false':
+    if hide_mark != 'true':
         li = xbmcgui.ListItem('Zaznamki')
         url = build_url(base, {'content_type': contentType, 'menu': 'ListMarkedItems', 'api': api})
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
     # ARHIV ODDAJ
-    if hide_shows == 'false':
+    if hide_shows != 'true':
         li = xbmcgui.ListItem('Arhiv oddaj')
         url = build_url(base, {'content_type': contentType, 'menu': 'ShowsArchive', 'api': api})
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
     # ARHIV PRISPEVKOV
-    if hide_clips == 'false':
+    if hide_clips != 'true':
         li = xbmcgui.ListItem('Arhiv prispevkov')
         url = build_url(base, {'content_type': contentType, 'menu': 'ClipsArchive', 'api': api})
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
     # ARHIV PO ABECEDI
-    if hide_letters == 'false':
+    if hide_letters != 'true':
         li = xbmcgui.ListItem('Arhiv po abecedi')
         url = build_url(base, {'content_type': contentType, 'menu': 'ListLetters', 'api': api})
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
@@ -455,7 +455,7 @@ def login():
     try:
         a = str(cookies_dict['APISESSION'])
     except:
-        if hide_nagger == 'false':
+        if hide_nagger != 'true':
             xbmcgui.Dialog().ok('RTV Slovenija',
                                 'Prijava je neuspešna! Nekatere vsebine brez prijave niso dosegljive. Uporabniško ime in geslo lahko brezplačno pridobite na https://moj.rtvslo.si/prijava. Vnos podatkov za prijavo je mogoč v nastavitvah.')
 

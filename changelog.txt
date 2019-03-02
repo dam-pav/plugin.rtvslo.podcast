@@ -1,3 +1,5 @@
+v1.0.3
+- bugfix for new settings' defaults
 v1.0.2
 - new settings options to hide menu areas and username/password nagger
 - new functionality to mark items for later viewing; don't wait for too long, some podcasts expire in a month or so
