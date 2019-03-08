@@ -498,7 +498,7 @@ def parseShowToStreamList(json_data, _args):
             url_query['callback'] = 'jQuery1113023734881856870338_1462389077542'
             url_query['_'] = '1462389077543'
 
-            url = build_url(url_base + 'getRecording/' + stream['id'], url_query)
+            url = build_url(url_base + 'getRecording/' + str(stream['id']), url_query)
 
             # download response from rtvslo api
             getItemList(url, {'listType': 'singlestream', 'title_style': _args.get('title_style', 'time')})
