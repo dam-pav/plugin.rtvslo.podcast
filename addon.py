@@ -20,6 +20,7 @@ import xbmcplugin
 url_base = 'http://api.rtvslo.si/ava/'
 client_id = '82013fb3a531d5414f478747c1aca622'
 delete_action = 'deleteall893745927368199189474t52910373h2i2u2j2788927628018736tghs8291282'
+podcast_file = 'podcast_'
 
 data_folder = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8')
 try:
@@ -33,8 +34,50 @@ mark_file = os.path.join(data_folder, 'mark.json')
 # classes
 
 #######################################
-
 # functions
+def clear_items():
+    cleanup_date = item_retrieve('cleanup_date')
+    if cleanup_date[0]:
+        if cleanup_date[1] == str(datetime.date.today()):
+            return
+
+    for dirpath, dirnames, filenames in os.walk(data_folder):
+        for file in filenames:
+            if file[0:len(podcast_file)] == podcast_file:
+                curpath = os.path.join(dirpath, file)
+                file_modified = datetime.datetime.fromtimestamp(os.path.getmtime(curpath))
+                if datetime.datetime.now() - file_modified > datetime.timedelta(days=cache_size):
+                    os.remove(curpath)
+
+    item_store('cleanup_date', str(datetime.date.today()))
+
+def item_store(filename, jdata):
+    storage_name = filename
+    storage_name = storage_name.replace('/', '_')
+    storage_name = storage_name.replace(':', '_')
+    storage_name = storage_name.replace('.', '_')
+    storage_name = os.path.join(xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8'),
+                              storage_name + '.json')
+    with open(storage_name, "w") as debug_file:
+        json.dump(jdata, debug_file)
+
+
+def item_retrieve(filename):
+    storage_name = filename
+    storage_name = storage_name.replace('/', '_')
+    storage_name = storage_name.replace(':', '_')
+    storage_name = storage_name.replace('.', '_')
+    storage_name = os.path.join(xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode('utf-8'),
+                              storage_name + '.json')
+
+    try:
+        with open(storage_name, "r") as s_file:
+            jdata = json.load(s_file)
+        return True, jdata
+    except:
+        return False, {}
+
+
 def do_ListMarkedItems():
     # seznam oddaj za pogledat
     showList = []
@@ -50,17 +93,7 @@ def do_ListMarkedItems():
         return
 
     for showid in j:
-        # url parameters
-        url_query = {}
-        url_query['client_id'] = client_id
-        url_query['session_id'] = api
-        url_query['callback'] = 'jQuery1113023734881856870338_1462389077542'
-        url_query['_'] = '1462389077543'
-
-        url = build_url(url_base + 'getRecording/' + showid, url_query)
-
-        # download response from rtvslo api
-        getItemList(url, {'listType': 'singlestream', 'title_style': 'date', 'marked_item': 'True'})
+        getSingleItem(showid, {'title_style': 'date', 'marked_item': 'True'})
 
 
 def do_MarkItem():
@@ -398,6 +431,39 @@ def do_ListStreams():
     getItemList(url, {'listType': 'streamlist', 'paging_style': 'page', 'title_style': 'date'})
 
 
+def getSingleItem(show_id, _args):
+    item_cached = item_retrieve(podcast_file + show_id)
+    if item_cached[0]:
+        rtvsloData = json.dumps(item_cached[1])
+    else:
+        # url parameters
+        url_query = {}
+        url_query['client_id'] = client_id
+        url_query['session_id'] = api
+        url_query['callback'] = 'jQuery1113023734881856870338_1462389077542'
+        url_query['_'] = '1462389077543'
+
+        url = build_url(url_base + 'getRecording/' + show_id, url_query)
+
+        # download response from rtvslo api
+        rtvsloHtml = urllib2.urlopen(url)
+        rtvsloData = rtvsloHtml.read()
+        rtvsloHtml.close()
+
+        # extract json from response
+        x = rtvsloData.find('({')
+        y = rtvsloData.rfind('});')
+        if x < 0 or y < 0:
+            xbmcgui.Dialog().ok('RTV Slovenija', 'Strežnik ni posredoval podatkov o podcastu.')
+            return
+        rtvsloData = rtvsloData[x + 1:y + 1]
+
+        item_store(podcast_file + show_id, json.loads(rtvsloData))
+
+    # parse json to a list of streams
+    parseStreamToListEntry(rtvsloData, _args)
+
+
 def getItemList(url, _args):
     rtvsloHtml = urllib2.urlopen(url)
     rtvsloData = rtvsloHtml.read()
@@ -409,15 +475,13 @@ def getItemList(url, _args):
     if x < 0 or y < 0:
         xbmcgui.Dialog().ok('RTV Slovenija', 'Strežnik ni posredoval seznama.')
         return
+    rtvsloData = rtvsloData[x + 1:y + 1]
 
     # parse json to a list of streams
-    rtvsloData = rtvsloData[x + 1:y + 1]
     if _args.get('listType') == 'showlist':
         parseShowsToShowList(rtvsloData)
     elif _args.get('listType') == 'streamlist':
         parseShowToStreamList(rtvsloData, _args)
-    elif _args.get('listType') == 'singlestream':
-        parseStreamToListEntry(rtvsloData, _args)
 
 
 def build_url(base, query):
@@ -483,25 +547,11 @@ def parseShowToStreamList(json_data, _args):
     j = json.loads(json_data)
     j = j['response']['recordings']
 
-    # DEBUG >>>
-    # web_pdb.set_trace()
-    # debug_dump('streamlist', json.loads(json_data))
-    # DEBUG <<<
     # find playlists and list streams
     for stream in j:
         if (contentType == 'audio' and stream['mediaType'] == 'audio') or (
                 contentType == 'video' and stream['mediaType'] == 'video'):
-            # url parameters
-            url_query = {}
-            url_query['client_id'] = client_id
-            url_query['session_id'] = api
-            url_query['callback'] = 'jQuery1113023734881856870338_1462389077542'
-            url_query['_'] = '1462389077543'
-
-            url = build_url(url_base + 'getRecording/' + str(stream['id']), url_query)
-
-            # download response from rtvslo api
-            getItemList(url, {'listType': 'singlestream', 'title_style': _args.get('title_style', 'time')})
+            getSingleItem(str(stream['id']), {'title_style': _args.get('title_style', 'time')})
 
     if _args.get('paging_style', '') == 'date':
         # previous day
@@ -623,7 +673,6 @@ def parseStreamToListEntry(json_data, _args):
 
 
 #######################################
-
 # main
 if __name__ == "__main__":
     try:
@@ -641,6 +690,10 @@ if __name__ == "__main__":
         hide_shows = xbmcplugin.getSetting(handle, 'hide_shows')
         hide_clips = xbmcplugin.getSetting(handle, 'hide_clips')
         hide_letters = xbmcplugin.getSetting(handle, 'hide_letters')
+        cache_size = xbmcplugin.getSetting(handle, 'cache_size')
+
+        # CLEANUP
+        clear_items()
 
         # in some cases kodi returns empty sys.argv[2]
         if Argv[2] == '':

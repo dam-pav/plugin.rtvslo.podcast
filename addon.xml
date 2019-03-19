@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.4" provider-name="dam-pav">
+<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.5" provider-name="dam-pav">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -18,10 +18,12 @@
 		<language>sl</language>
 		<platform>all</platform>
 		<license>WTFPL, Version 2, December 2004</license>
-                <website>http://dam-pav.eu5.org</website>
+        <website>https://dam-pav.github.io</website>
 		<source>https://github.com/dam-pav/plugin.rtvslo.podcast</source>
-		<news lang="en">v1.0.4 (2019-03-08)
-- minor change in the API
+		<news lang="en">v1.0.5 (2019-03-19)
+- podcast item info caching (faster page reload)
+v1.0.4 (2019-03-08)
+- RTVSLO introduced a minor change in the API, update required
 v1.0.3 (2019-03-01)
 - bugfix for new settings' defaults
 v1.0.2 (2019-03-01)

@@ -10,5 +10,7 @@
         <setting type="bool" id="hide_shows" label="Skrij Arhiv oddaj" default="false" visible="true"/>
         <setting type="bool" id="hide_clips" label="Skrij Arhiv prispevkov" default="false" visible="true"/>
         <setting type="bool" id="hide_letters" label="Skrij Arhiv po abecedi" default="false" visible="true"/>
+        <setting type="sep"/>
+        <setting type="number" id="cache_size" label="Število dni hranjenja informacij o podcastih v medpomnilniku" default="7" visible="true"/>
     </category>
 </settings>

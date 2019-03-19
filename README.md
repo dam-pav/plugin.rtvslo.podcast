@@ -9,8 +9,8 @@ The plugin, as such, works perfectly in v18.0 (Leia) as well, this latest versio
 Plugin kot tak deluje tudi v v18.0 (Leia), vendar ima v18.0 težave s predvajanjem video tokov iz RTVSLO, zelo verjetno pa tudi iz vseh podobnih virov. Plugin na način in kvaliteto predvajanja video tokov nima vpliva. Zato odsvetujemo nadgradnjo na v18.0, oziroma svetujemo povrnitev na verzijo v17.6, dokler teh težav razvijalci Kodi-ja ne razrešijo.
 
 ## Setup / Namestitev ##
-Download file as ".zip" (plugin.rtvslo.podcast-master), then install plugin via Kodi interface.  
-Prenesi ".zip" datoteko (plugin.rtvslo.podcast-master), nato namesti preko Kodi vmesnika.
+See https://dam-pav.github.io. Download the repository file as ".zip" (https://raw.githubusercontent.com/dam-pav/repo.rtvslo.kodi/master/repository.dam-pav.rtvslo/repository.dam-pav.rtvslo-1.0.0.zip), then install via Kodi interface. Install plugins from repository.  
+Glej https://dam-pav.github.io. Prenesi ".zip" datoteko repozitorija (https://raw.githubusercontent.com/dam-pav/repo.rtvslo.kodi/master/repository.dam-pav.rtvslo/repository.dam-pav.rtvslo-1.0.0.zip), nato namesti preko Kodi vmesnika. Posamezne dodatke namesti iz repozitorija.
 
 ## Author / avtor: dam-pav ##
 Suggestions and advice welcome.  
