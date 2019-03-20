@@ -433,9 +433,14 @@ def do_ListStreams():
 
 def getSingleItem(show_id, _args):
     item_cached = item_retrieve(podcast_file + show_id)
-    if item_cached[0]:
-        rtvsloData = json.dumps(item_cached[1])
-    else:
+    its_ok = item_cached[0]
+    if its_ok:
+        try:
+            just_response = item_cached[1]['response']
+        except KeyError:
+            its_ok = False
+
+    if not its_ok:
         # url parameters
         url_query = {}
         url_query['client_id'] = client_id
@@ -454,14 +459,20 @@ def getSingleItem(show_id, _args):
         x = rtvsloData.find('({')
         y = rtvsloData.rfind('});')
         if x < 0 or y < 0:
-            xbmcgui.Dialog().ok('RTV Slovenija', 'Strežnik ni posredoval podatkov o podcastu.')
+            # xbmcgui.Dialog().ok('RTV Slovenija', 'Strežnik ni posredoval podatkov o podcastu.')
             return
         rtvsloData = rtvsloData[x + 1:y + 1]
+        complete_item = json.loads(rtvsloData)
 
-        item_store(podcast_file + show_id, json.loads(rtvsloData))
+        try:
+            just_response = complete_item['response']
+        except KeyError:
+            return
+
+        item_store(podcast_file + show_id, complete_item)
 
     # parse json to a list of streams
-    parseStreamToListEntry(rtvsloData, _args)
+    parseStreamToListEntry(just_response, _args)
 
 
 def getItemList(url, _args):
@@ -518,7 +529,7 @@ def login():
     a = ''
     try:
         a = str(cookies_dict['APISESSION'])
-    except:
+    except KeyError:
         if hide_nagger != 'true':
             xbmcgui.Dialog().ok('RTV Slovenija',
                                 'Prijava je neuspešna! Nekatere vsebine brez prijave niso dosegljive. Uporabniško ime in geslo lahko brezplačno pridobite na https://moj.rtvslo.si/prijava. Vnos podatkov za prijavo je mogoč v nastavitvah.')
@@ -576,9 +587,7 @@ def parseShowToStreamList(json_data, _args):
         xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=True)
 
 
-def parseStreamToListEntry(json_data, _args):
-    j = json.loads(json_data)
-    j = j['response']
+def parseStreamToListEntry(j, _args):
     if len(j) == 0:
         return
 
@@ -588,21 +597,21 @@ def parseStreamToListEntry(json_data, _args):
             typeOK = False
         if contentType == 'video' and j['mediaType'] == 'audio':
             typeOK = False
-    except:
+    except Exception:
         pass
 
     if typeOK:
         # newer video streams usually have this format
         try:
             stream_url = j['addaptiveMedia']['hls']
-        except:
+        except KeyError:
             # audio streams and some older video streams have this format
             try:
                 stream_url = j['mediaFiles'][0]['streamers']['http']
                 if stream_url.find('ava_archive02') > 0:
                     stream_url = stream_url.replace("ava_archive02", "podcast/ava_archive02")
                 stream_url = stream_url + '/' + j['mediaFiles'][0]['filename']
-            except:
+            except KeyError:
                 pass
 
     # list stream
@@ -619,7 +628,7 @@ def parseStreamToListEntry(json_data, _args):
                 # stream_genre = stream_genre + ',' + g
                 stream_genre = g  # rabimo samo zadnjega
         # stream_genre = stream_genre[1:]
-        except:
+        except KeyError:
             pass
 
         if _args.get('title_style') == 'date':
@@ -690,7 +699,7 @@ if __name__ == "__main__":
         hide_shows = xbmcplugin.getSetting(handle, 'hide_shows')
         hide_clips = xbmcplugin.getSetting(handle, 'hide_clips')
         hide_letters = xbmcplugin.getSetting(handle, 'hide_letters')
-        cache_size = xbmcplugin.getSetting(handle, 'cache_size')
+        cache_size = int(xbmcplugin.getSetting(handle, 'cache_size'))
 
         # CLEANUP
         clear_items()
