@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.5" provider-name="dam-pav">
+<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.6" provider-name="dam-pav">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -20,7 +20,9 @@
 		<license>WTFPL, Version 2, December 2004</license>
         <website>https://dam-pav.github.io</website>
 		<source>https://github.com/dam-pav/plugin.rtvslo.podcast</source>
-		<news lang="en">v1.0.5 (2019-03-19)
+		<news lang="en">v1.0.6 (2019-03-30)
+- bugfix: item marks stopped working after v1.0.5
+v1.0.5 (2019-03-19)
 - podcast item info caching (faster page reload)
 v1.0.4 (2019-03-08)
 - RTVSLO introduced a minor change in the API, update required
@@ -38,7 +40,13 @@ v1.0.0 (2019-01-09)
 - listing podcasts by calendar days rather than random pages
 - search tool reintroduced; yes, with unicode support(čšž...)
 - searching for audio podcasts included</news>
-		<news lang="sl">v1.0.3 (2019-03-01)
+		<news lang="sl">v1.0.6 (2019-03-30)
+- bugfix: po v1.0.5 ni mogoče dodajati zaznamkov
+v1.0.5 (2019-03-19)
+- podatke o oddajah in prispevkih sedaj hranimo v medpomnilniku (nekoliko hitrejše ponovno nalaganje)
+v1.0.4 (2019-03-08)
+- RTVSLO je vpeljal manjšo spremembo v API, zato uskladitev
+v1.0.3 (2019-03-01)
 - bugfix za nove privzete nastavitve
 v1.0.2 (2019-03-01)
 - nove možnosti v nastavitvah omogočajo skrivanje delov funkcionalnosti, ki jih ne uporabljate

@@ -27,6 +27,7 @@ try:
     os.makedirs(data_folder)
 except:
     pass
+
 search_history_file = os.path.join(data_folder, 'history.json')
 mark_file = os.path.join(data_folder, 'mark.json')
 
@@ -40,6 +41,8 @@ def clear_items():
     if cleanup_date[0]:
         if cleanup_date[1] == str(datetime.date.today()):
             return
+
+    cache_size = int(xbmcplugin.getSetting(handle, 'cache_size'))
 
     for dirpath, dirnames, filenames in os.walk(data_folder):
         for file in filenames:
@@ -431,8 +434,8 @@ def do_ListStreams():
     getItemList(url, {'listType': 'streamlist', 'paging_style': 'page', 'title_style': 'date'})
 
 
-def getSingleItem(show_id, _args):
-    item_cached = item_retrieve(podcast_file + show_id)
+def getSingleItem(showid, _args):
+    item_cached = item_retrieve(podcast_file + showid)
     its_ok = item_cached[0]
     if its_ok:
         try:
@@ -448,7 +451,7 @@ def getSingleItem(show_id, _args):
         url_query['callback'] = 'jQuery1113023734881856870338_1462389077542'
         url_query['_'] = '1462389077543'
 
-        url = build_url(url_base + 'getRecording/' + show_id, url_query)
+        url = build_url(url_base + 'getRecording/' + showid, url_query)
 
         # download response from rtvslo api
         rtvsloHtml = urllib2.urlopen(url)
@@ -469,7 +472,7 @@ def getSingleItem(show_id, _args):
         except KeyError:
             return
 
-        item_store(podcast_file + show_id, complete_item)
+        item_store(podcast_file + showid, complete_item)
 
     # parse json to a list of streams
     parseStreamToListEntry(just_response, _args)
@@ -699,7 +702,6 @@ if __name__ == "__main__":
         hide_shows = xbmcplugin.getSetting(handle, 'hide_shows')
         hide_clips = xbmcplugin.getSetting(handle, 'hide_clips')
         hide_letters = xbmcplugin.getSetting(handle, 'hide_letters')
-        cache_size = int(xbmcplugin.getSetting(handle, 'cache_size'))
 
         # CLEANUP
         clear_items()

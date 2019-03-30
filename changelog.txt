@@ -1,3 +1,5 @@
+v1.0.6 (2019-03-30)
+- bugfix: item marks stopped working after v1.0.5
 v1.0.5 (2019-03-19)
 - podcast item info caching (faster page reload)
 v1.0.4 (2019-03-08)
