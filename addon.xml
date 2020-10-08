@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.6" provider-name="dam-pav">
+<addon id="plugin.rtvslo.podcast" name="RTV Slovenija - arhiv" version="1.0.7" provider-name="dam-pav">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -20,7 +20,9 @@
 		<license>WTFPL, Version 2, December 2004</license>
         <website>https://dam-pav.github.io</website>
 		<source>https://github.com/dam-pav/plugin.rtvslo.podcast</source>
-		<news lang="en">v1.0.6 (2019-03-30)
+		<news lang="en">v1.0.7 (2020-10-08)
+- temporary fix: login stopped working on 2020-10-07, until this is fixed, removing username or password will enable plugin to still work for a limited amount of content
+v1.0.6 (2019-03-30)
 - bugfix: item marks stopped working after v1.0.5
 v1.0.5 (2019-03-19)
 - podcast item info caching (faster page reload)
