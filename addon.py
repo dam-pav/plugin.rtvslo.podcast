@@ -508,6 +508,12 @@ def login():
     password = xbmcplugin.getSetting(handle, 'password')
     hide_nagger = xbmcplugin.getSetting(handle, 'hide_nagger')
 
+    if username == '' or password == '':
+        if hide_nagger != 'true':
+            xbmcgui.Dialog().ok('RTV Slovenija',
+                                'Nimate konfigurirane prijave! Nekatere vsebine brez prijave niso dosegljive. Uporabniško ime in geslo lahko brezplačno pridobite na https://moj.rtvslo.si/prijava. Vnos podatkov za prijavo je mogoč v nastavitvah.')
+        return
+
     # no Requests library dependency required...
     url = 'https://www.rtvslo.si/prijava'
     referurl = 'https://www.rtvslo.si'
