@@ -515,8 +515,8 @@ def login():
         return
 
     # no Requests library dependency required...
-    url = 'https://www.rtvslo.si/prijava'
-    referurl = 'https://www.rtvslo.si'
+    url = 'https://4d.rtvslo.si/prijava'
+    referurl = 'https://4d.rtvslo.si'
     params = urllib.urlencode({'action': 'login', 'referer': referurl, 'user': username, 'pass': password})
     headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
 
